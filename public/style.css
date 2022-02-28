@@ -1,0 +1,9 @@
+.logo 
+{ /* png devient blanc */
+    filter: brightness(0) invert(1);
+}
+
+#lien-linkedin 
+{
+    color: white;
+}

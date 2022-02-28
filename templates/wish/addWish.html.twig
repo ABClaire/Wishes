@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre %}
+	{{ titre }}
+	|
+	{{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+
+	<h1 class="text-center">
+		{{ titre }}
+	</h1>
+
+	<div class="col-6 my-4 h-100">
+		{{ form_start(formulaire) }}
+
+		{{ form_widget(formulaire) }}
+		<button id="submit" name="submit" class="btn btn-success">Add your wish</button>
+		{{ form_end(formulaire) }}
+
+	</div>
+
+{% endblock %}

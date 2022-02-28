@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre %}
+    {{ titre }} | {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="text-center">{{ titre }}</h1>
+
+<div class="offset-2 col-7">
+    <table class= "table table striped">
+            <thead>
+                <tr>
+                    <th>Wish</th>
+                    <th>Description</th>
+                    <th>Author</th>
+                    <th>Date creation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ myWish.title }} </td>
+                    <td>{{ myWish.description }}</td>
+                    <td>{{myWish.author}}</td>
+                    <td>{{myWish.dateCreated | date('d-m-Y H:i:s')}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+{% endblock %}
