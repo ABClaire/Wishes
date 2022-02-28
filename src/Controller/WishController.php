@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Wish;
 use App\Form\WishType;
+use App\Repository\CategorieRepository;
 use App\Repository\WishRepository;
 use DateTime;
 use DateTimeZone;
@@ -48,10 +49,11 @@ class WishController extends AbstractController
      /**
      * @Route("/add-wish", name="add_wish")
      */
-    public function addWish(Request $request, EntityManagerInterface $em): Response
+    public function addWish(Request $request, EntityManagerInterface $em,CategorieRepository $repoC): Response
     {
         // Create the object
         $wish = new Wish();
+        $wish->setCategorie($repoC->find(5));
         $wish->setIsPublished('true');
         $wish->setDateCreated(new \DateTime('now', new DateTimeZone('Europe/Paris')));
         

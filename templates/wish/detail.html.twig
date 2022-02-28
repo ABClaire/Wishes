@@ -16,6 +16,7 @@
                     <th>Wish</th>
                     <th>Description</th>
                     <th>Author</th>
+                    <th>Type</th>
                     <th>Date creation</th>
                 </tr>
             </thead>
@@ -23,8 +24,9 @@
                 <tr>
                     <td>{{ myWish.title }} </td>
                     <td>{{ myWish.description }}</td>
-                    <td>{{myWish.author}}</td>
-                    <td>{{myWish.dateCreated | date('d-m-Y H:i:s')}}</td>
+                    <td>{{ myWish.author }}</td>
+                    <td>{{ myWish.categorie.libelle }}</td>
+                    <td>{{ myWish.dateCreated | date('d-m-Y H:i:s') }}</td>
                 </tr>
             </tbody>
         </table>

@@ -30,6 +30,7 @@
 					<tr>
 						<th>Wish</th>
 						<th>Date creation</th>
+						<th>Category</th>
 						<th colspan="3" class="text-center">Action</th>
 					</tr>
 				</thead>
@@ -38,6 +39,7 @@
 						<tr>
 							<td>{{w.title}}</td>
 							<td>{{w.dateCreated | date('d-m-Y')}}</td>
+							<td>{{w.categorie.libelle}}</td>
 							<td>
 								<a class="btn btn-info" href="{{path('detail',{'id':w.id}) }}" title="detail">
 									<i class="fa-solid fa-eye"></i>
@@ -49,7 +51,9 @@
 								</a>
 							</td>
 							<td>
-								<a class="btn btn-danger" href="{{path('delete_wish',{'id':w.id}) }}" title="delete">
+								<a onclick="return confirm('Voulez-vous enlever {{w.title}}?')" 
+									class="btn btn-danger" href="{{path('delete_wish',{'id':w.id}) }}" 
+									title="delete">
 									<i class="fa-solid fa-trash-can"></i>
 								</a>
 							</td>

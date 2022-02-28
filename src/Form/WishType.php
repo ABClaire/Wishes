@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Wish;
-use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +17,7 @@ class WishType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('author')
+            ->add('categorie', null, ['choice_label'=>'libelle'])
             ->add('dateNaissance', DateType::class, 
                     [
                         'mapped' => false,
