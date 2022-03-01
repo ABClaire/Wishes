@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
+use App\Entity\Wish;
+use App\Repository\CategorieRepository;
 use App\Repository\WishRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,31 +25,60 @@ class ApiWishController extends AbstractController
     /**
      * @Route("/wish", name="api_wish_add", methods={"POST"})
      */
-    public function addWish(Request $request): Response
+    public function addWish(Request $request, EntityManagerInterface $em, CategorieRepository $repo): Response
     {        
-        $wish = json_decode($request->getContent());
+        // Retrieve information from the API body
+        $body = json_decode($request->getContent());
+        $categorie = $repo->find($body->categorieId);
 
-        $tab['info'] = 'Ajouter à la liste des wish: ' . ' ' . $wish->title . ' ' . $wish->description;
-        
-        return $this->json($tab);
+        // Create the object and set it
+        $wish = new Wish();
+        $wish->setTitle($body->title);
+        $wish->setDescription($body->description);
+        $wish->setAuthor($body->author);
+        $wish->setCategorie($categorie);
+        $wish->setIsPublished('true');
+        $wish->setDateCreated(new \DateTime('now'));
+
+        // Add the object to the bdd
+        $em->persist($wish);
+        $em->flush();
+
+        return $this->json($wish);
     }
 
     /**
      * @Route("/wish/{id}", name="api_wish_edit", methods={"PUT"})
      */
-    public function editWish($id): Response
+    public function editWish(Wish $wish, Request $request, EntityManagerInterface $em): Response
     {
-        $tab['info'] = 'Modifier un wish' .' ' .$id;
-        
-        return $this->json($tab);
+        // Retrieve information from the API body
+        $body = json_decode($request->getContent());
+
+        // Create the object and set it
+        $wish = new Wish();
+        $wish->setTitle($body->title);
+        $wish->setDescription($body->description);
+        $wish->setAuthor($body->author);
+        $wish->setDateCreated(new \DateTime('now'));
+
+        // Add the object to the bdd
+        $em->flush();
+
+        return $this->json($wish);
     }
 
     /**
      * @Route("/wish/{id}", name="api_wish_delete", methods={"DELETE"})
      */
-    public function deleteWish($id): Response
+    public function deleteWish(EntityManagerInterface $em, Wish $wish): Response
     {
-        $tab['info'] = 'Effacter un wish' .' ' .$id;
+        // Remove
+        $em->remove($wish);
+        $em->flush();
+
+        // Information
+        $tab['info'] = 'The wish is erased';
         
         return $this->json($tab);
     }
