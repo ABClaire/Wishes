@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\WishRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=WishRepository::class)
@@ -47,6 +48,7 @@ class Wish
     private $dateCreated;
 
     /**
+     * @Groups("categories")
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="wishes")
      * @ORM\JoinColumn(nullable=false)
      */

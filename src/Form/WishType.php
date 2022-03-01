@@ -14,7 +14,7 @@ class WishType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
+            ->add('title', null, ["attr"=> ['placeholder' => 'Votre titre ici']])
             ->add('description')
             ->add('author')
             ->add('categorie', null, ['choice_label'=>'libelle'])
