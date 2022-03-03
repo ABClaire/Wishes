@@ -16,8 +16,14 @@
 
 	<div class="col-6 my-4 h-100">
 		{{ form_start(formulaire) }}
+			{{ form_row(formulaire.title)}}
+			{{ form_row(formulaire.description)}}
+			{{ form_row(formulaire.author, {
+            	value: app.user.pseudo
+        	}) }}
+		{{ form_row(formulaire.categorie)}}
+		{{ form_row(formulaire.dateNaissance)}}
 
-		{{ form_widget(formulaire) }}
 		<button id="submit" name="submit" class="btn btn-success">Add your wish</button>
 		{{ form_end(formulaire) }}
 
