@@ -71,20 +71,22 @@
     <!-- Page Content-->
     <div class="container px-4 px-lg-5">  
         <div class="row"> 
-    {% block body %}
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-    {% endblock %}
+            <body class="d-flex flex-column min-vh-100">
+                {% block body %}
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert-{{ label }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                {% endblock %}
+            </body>
         </div>    
     </div>
 
     <!-- Footer -->
-    <footer class="container-fluid bg-secondary text-center text-lg-start footer wow fadeIn" data-wow-delay="0.1s">
+    <footer class="container-fluid bg-secondary text-center text-lg-start mt-auto">
         <div class="text-center p-3">
            <span class="text-white"> Créé par Claire Goarnisson</span>
             <span> 
