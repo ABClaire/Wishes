@@ -42,32 +42,45 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a 
-                    class="nav-link {% if r == 'list' %}active{% endif %}"
-                    href="{{ path('list')}}">Wish List</a></li>
-                    <li class="nav-item"><a 
-                    class="nav-link {% if r == 'about-me' %}active{% endif %}"
-                    href="{{ path('about_me')}}">About me</a></li>
+                    <li class="nav-item">
+                        <a  class="nav-link {% if r == 'list' %}active{% endif %}"
+                        href="{{ path('list')}}">Wish List</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {% if r == 'about-me' %}active{% endif %}"
+                        href="{{ path('about_me')}}">About me</a>
+                    </li>
+
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a  class="nav-link {% if r == 'app_logout' %}active{% endif %}"
+                            href="{{ path('app_logout')}}">Logout {{app.user.email}}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a  class="nav-link {% if r == 'app_login' %}active{% endif %}"
+                            href="{{ path('app_login')}}">Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Page Content-->
-    <div class="container px-4 px-lg-5">
-            
+    <div class="container px-4 px-lg-5">  
         <div class="row"> 
+    {% block body %}
             {% for label, messages in app.flashes %}
-				{% for message in messages %}
-					<div class="alert-{{ label }}">
+                {% for message in messages %}
+                    <div class="alert-{{ label }}">
                         {{ message }}
-					</div>
-				{% endfor %}
-			{% endfor %}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+    {% endblock %}
         </div>    
-
-        {% block body %}
-        {% endblock %}
     </div>
 
     <!-- Footer -->
@@ -84,7 +97,6 @@
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
        
     </body>
 </html>

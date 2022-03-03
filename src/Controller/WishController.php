@@ -16,6 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Timezone;
 
+
+/**
+ * @Route("/admin")
+ */
 class WishController extends AbstractController
 {
 

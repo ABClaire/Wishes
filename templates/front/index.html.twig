@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}{{parent()}}
+{% endblock %}
+
+{% block body  %}
+
+	<div class="row my-4">
+		<div class="col-md-6 vh-100">
+			<img class="img-fluid" src="{{asset ('img/wish.png')}} " alt="wish-picture">
+
+		</div>
+
+		<div class="col-6">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Wish</th>
+						<th>Date creation</th>
+						<th>Category</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for w in list | sort((d1,d2) => d2.dateCreated <=> d1.dateCreated) %}
+						<tr>
+							<td>{{w.title}}</td>
+							<td>{{w.dateCreated | date('d-m-Y')}}</td>
+							<td>{{w.categorie.libelle}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
